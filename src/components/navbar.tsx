@@ -6,13 +6,9 @@ import { motion } from "framer-motion";
 
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "./theme-toggle";
+import { NavItem } from "@/types";
 
-const NAV_ITEMS = [
-	{ href: "/work", label: "Work" },
-	{ href: "/links", label: "Links" },
-];
-
-export function Navbar() {
+export function Navbar({ navItems }: { navItems: NavItem[] }) {
 	const pathname = usePathname();
 
 	const isActive = (path: string) => {
@@ -26,9 +22,9 @@ export function Navbar() {
 			</Link>
 
 			<div className="flex items-center gap-8">
-				{NAV_ITEMS.map(({ href, label }) => (
+				{navItems.map(({ title, href }) => (
 					<NavLink key={href} href={href} active={isActive(href)}>
-						{label}
+						{title}
 					</NavLink>
 				))}
 				<ThemeToggle />
