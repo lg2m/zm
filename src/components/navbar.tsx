@@ -37,7 +37,11 @@ function NavLink({
 	href,
 	active,
 	children,
-}: { href: string; active: boolean; children: React.ReactNode }) {
+}: {
+	href: string;
+	active: boolean;
+	children: React.ReactNode;
+}) {
 	return (
 		<Link href={href} className="relative text-sm group">
 			<span
