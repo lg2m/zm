@@ -1,146 +1,95 @@
-"use client";
-
-import { motion } from "framer-motion";
-import Link from "next/link";
+import { ExternalLink } from "lucide-react";
+import { WORK_CONFIG } from "@/config/work";
 
 export default function Page() {
-	const workHistory = [
-		{
-			name: "Syntiant Corp.",
-			positions: [
-				{
-					role: "Member of Technical Staff",
-					dates: "Sep 2021 - Present",
-					description:
-						"Built and maintained infrastructure for ML teams, including Kubernetes clusters, GitLab CI pipelines, and internal tools to accelerate model training.",
-				},
-				{
-					role: "Data Analyst",
-					dates: "Aug 2020 - Sep 2021",
-					description:
-						"Developed internal tools and systems for managing and preparing raw data for machine learning training, with a focus on improving quality and usability.",
-				},
-				{
-					role: "Software Engineering Intern",
-					dates: "Dec 2019 - Aug 2020",
-					description:
-						"Contributed to the development of a fullstack application for labeling audio data used in ML models.",
-				},
-			],
-		},
-		{
-			name: "PhiSight Corp.",
-			positions: [
-				{
-					role: "Fullstack Developer (freelance)",
-					dates: "Feb 2024 - Mar 2024",
-					description:
-						"Developed a responsive frontend in React for marketing site as part of a short-term contract.",
-				},
-			],
-		},
-	];
-	const projects = [
-		{
-			title: "athena",
-			href: "https://github.com/lg2m/athena",
-			description: "A terminal based text-editor similar to Vim and Helix.",
-			tech: ["Go"],
-		},
-		{
-			title: "tools",
-			href: "https://tools.zmeyer.dev",
-			description: "Various open-source tools I build and use daily.",
-			tech: ["React", "Next.js", "Bun"],
-		},
-	];
-
-	const container = {
-		hidden: { opacity: 0 },
-		show: {
-			opacity: 1,
-			transition: {
-				staggerChildren: 0.1,
-			},
-		},
-	};
-
-	const item = {
-		hidden: { opacity: 0, y: 20 },
-		show: { opacity: 1, y: 0 },
-	};
-
 	return (
-		<div className="py-12">
-			<motion.section
-				className="mb-16"
-				initial="hidden"
-				animate="show"
-				variants={container}
-			>
-				<motion.h1
-					variants={item}
-					className="text-2xl font-light mb-10 tracking-tight"
-				>
-					Work History
-				</motion.h1>
+		<div className="space-y-8">
+			<div>
+				<h1 className="text-2xl font-normal mb-1">work</h1>
+				<p className="text-[15px] text-muted-foreground">
+					professional experience and projects
+				</p>
+			</div>
 
-				{workHistory.map((work) => (
-					<motion.div variants={item} key={work.name} className="mb-12">
-						<h2 className="text-base font-normal mb-6">{work.name}</h2>
-						<div className="space-y-8 ml-0 sm:ml-4">
-							{work.positions.map((position) => (
-								<div key={position.role} className="group">
-									<div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-1">
-										<h3 className="text-base font-normal">{position.role}</h3>
-										<span className="text-xs text-gray-500 dark:text-gray-400 mt-1 sm:mt-0">
-											{position.dates}
+			<div className="space-y-10">
+				{WORK_CONFIG.experience.map((job) => (
+					<div key={job.company} className="space-y-4">
+						<h2 className="text-[15px] font-medium">{job.company}</h2>
+
+						<div className="space-y-6">
+							{job.positions.map((position) => (
+								<div
+									key={`${job.company}-${position.title}`}
+									className="space-y-3"
+								>
+									<div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1">
+										<span className="text-[14px] text-muted-foreground">
+											{position.title}
+										</span>
+										<span className="text-[13px] text-muted-foreground/70 tabular-nums">
+											{position.period}
 										</span>
 									</div>
-									<p className="text-sm text-gray-600 dark:text-gray-300 font-light">
+
+									<p className="text-[14px] text-muted-foreground/80 leading-relaxed">
 										{position.description}
 									</p>
+
+									{position.technologies && (
+										<div className="flex flex-wrap gap-2 pt-1">
+											{position.technologies.map((tech) => (
+												<span
+													key={tech}
+													className="text-[13px] text-muted-foreground"
+												>
+													{tech}
+												</span>
+											))}
+										</div>
+									)}
 								</div>
 							))}
 						</div>
-					</motion.div>
+					</div>
 				))}
-			</motion.section>
+			</div>
 
-			<motion.section initial="hidden" animate="show" variants={container}>
-				<motion.h1
-					variants={item}
-					className="text-2xl font-light mb-10 tracking-tight"
-				>
-					Projects
-				</motion.h1>
-				<motion.div variants={container} className="space-y-12">
-					{projects.map((project) => (
-						<motion.div key={project.title} variants={item} className="group">
-							<h2 className="text-base font-normal mb-1">
-								{project.href ? (
-									<Link href={project.href}>{project.title}</Link>
-								) : (
-									<>{project.title}</>
-								)}
-							</h2>
-							<p className="text-sm text-gray-600 dark:text-gray-400 mb-3 font-light">
+			<div className="space-y-6 pt-4 border-t border-border/40">
+				<h2 className="text-[15px] font-medium">projects</h2>
+
+				<div className="space-y-6">
+					{WORK_CONFIG.projects.map((project) => (
+						<div key={project.name} className="space-y-2">
+							<a
+								href={project.href}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="text-[14px] text-foreground hover:text-foreground/70 transition-colors inline-flex items-center gap-1.5"
+							>
+								{project.name}
+								<ExternalLink className="w-3 h-3" />
+							</a>
+
+							<p className="text-[14px] text-muted-foreground/80 leading-relaxed">
 								{project.description}
 							</p>
-							<div className="flex flex-wrap gap-2">
-								{project.tech.map((tech) => (
-									<span
-										key={tech}
-										className="px-2 py-0.5 text-xs text-gray-500 dark:text-gray-400 bg-gray-100/50 dark:bg-gray-800/50 rounded-full"
-									>
-										{tech}
-									</span>
-								))}
-							</div>
-						</motion.div>
+
+							{project.technologies && (
+								<div className="flex flex-wrap gap-2 pt-1">
+									{project.technologies.map((tech) => (
+										<span
+											key={tech}
+											className="text-[13px] text-muted-foreground"
+										>
+											{tech}
+										</span>
+									))}
+								</div>
+							)}
+						</div>
 					))}
-				</motion.div>
-			</motion.section>
+				</div>
+			</div>
 		</div>
 	);
 }

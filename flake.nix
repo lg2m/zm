@@ -29,7 +29,6 @@
 
             # Formatters & Linters
             biome
-            prettierd
 
             # Misc
             nodePackages_latest.typescript
@@ -47,7 +46,6 @@
             echo "  - tailwindcss-language-server (LSP)"
             echo "  - superhtml (LSP)"
             echo "  - biome (formatter)"
-            echo "  - prettierd (formatter)"
           '';
         };
       }

@@ -1,9 +1,11 @@
 "use client";
 
+import { Moon, Sun } from "lucide-react";
+
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { Moon, Sun } from "lucide-react";
-import { motion } from "framer-motion";
+
+import { Button } from "./ui/button";
 
 export function ThemeToggle() {
 	const { theme, setTheme } = useTheme();
@@ -14,23 +16,19 @@ export function ThemeToggle() {
 		setMounted(true);
 	}, []);
 
-	if (!mounted) {
-		return null;
-	}
+	const isDark = mounted && theme === "dark";
 
 	return (
-		<motion.button
-			onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-			className="p-1 rounded-full focus:outline-none"
+		<Button
+			variant="ghost"
+			size="icon"
 			aria-label="Toggle theme"
-			whileTap={{ scale: 0.9 }}
-			whileHover={{ scale: 1.1 }}
+			aria-pressed={isDark}
+			onClick={() => setTheme(isDark ? "light" : "dark")}
+			className={!mounted ? "pointer-events-none opacity-0" : "h-8 w-8"}
 		>
-			{theme === "dark" ? (
-				<Sun className="h-4 w-4" />
-			) : (
-				<Moon className="h-4 w-4" />
-			)}
-		</motion.button>
+			<Sun className="h-4 w-4 dark:rotate-0 dark:scale-100 transition-all -rotate-90 scale-0" />
+			<Moon className="absolute h-4 w-4 dark:rotate-90 dark:scale-0 transition-all rotate-0 scale-100" />
+		</Button>
 	);
 }

@@ -1,10 +1,15 @@
-import posthog from "posthog-js"; 
+import posthog from "posthog-js";
 
-if (!process.env.NEXT_PUBLIC_POSTHOG_KEY || !process.env.NEXT_PUBLIC_POSTHOG_HOST) {
-  throw new Error("[ENV]: Missing environment variables (NEXT_PUBLIC_POSTHOG_KEY, NEXT_PUBLIC_POSTHOG_HOST)");
+if (
+	!process.env.NEXT_PUBLIC_POSTHOG_KEY ||
+	!process.env.NEXT_PUBLIC_POSTHOG_HOST
+) {
+	throw new Error(
+		"[ENV]: Missing environment variables (NEXT_PUBLIC_POSTHOG_KEY, NEXT_PUBLIC_POSTHOG_HOST)",
+	);
 }
 
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-  api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-  defaults: '2025-05-24'
-})
+	api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+	defaults: "2025-05-24",
+});

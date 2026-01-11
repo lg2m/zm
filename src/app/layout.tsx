@@ -1,40 +1,58 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
+
 import { ThemeProvider } from "next-themes";
 
 import { Navbar } from "@/components/navbar";
-import { siteConfig } from "@/config/site";
-import { cn } from "@/lib/utils";
+import { SITE_CONFIG } from "@/config/site";
 
 import "./globals.css";
 
-const inter = Inter({
-	subsets: ["latin"],
-	weight: ["300", "400", "500"],
-});
+const geist = Geist({ subsets: ["latin"] });
+const geistMono = Geist_Mono({ subsets: ["latin"] });
+
+void geist;
+void geistMono;
 
 export const metadata: Metadata = {
+	metadataBase: new URL(SITE_CONFIG.url),
 	title: {
-		default: siteConfig.name,
-		template: `%s | ${siteConfig.name}`,
+		default: SITE_CONFIG.name,
+		template: `%s | ${SITE_CONFIG.name}`,
 	},
-	description: siteConfig.description,
-	keywords: siteConfig.keywords,
-	authors: siteConfig.authors,
-	creator: "Zachary Meyer",
+	description: SITE_CONFIG.description,
+	keywords: [...SITE_CONFIG.keywords],
+	authors: [...SITE_CONFIG.authors],
+	creator: SITE_CONFIG.authors[0]?.name,
+	alternates: {
+		canonical: "/",
+	},
+	robots: {
+		index: true,
+		follow: true,
+		googleBot: {
+			index: true,
+			follow: true,
+			"max-image-preview": "large",
+			"max-snippet": -1,
+			"max-video-preview": -1,
+		},
+	},
 	openGraph: {
 		type: "website",
 		locale: "en_US",
-		url: siteConfig.url,
-		title: siteConfig.name,
-		description: siteConfig.description,
-		siteName: siteConfig.name,
+		url: SITE_CONFIG.url,
+		title: SITE_CONFIG.name,
+		description: SITE_CONFIG.description,
+		siteName: SITE_CONFIG.name,
+		// images: [{ url: "/og.png", width: 1200, height: 630, alt: SITE_CONFIG.name }],
 	},
 	twitter: {
 		card: "summary",
-		title: siteConfig.name,
-		description: siteConfig.description,
+		title: SITE_CONFIG.name,
+		description: SITE_CONFIG.description,
 		creator: "@absencelul",
+		// images: ["/og.png"]
 	},
 };
 
@@ -55,15 +73,16 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<head />
-			<body className={cn("min-h-screen relative", inter.className)}>
-				<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-					<div className="fixed inset-0 bg-[#f8f8f8] dark:bg-[#111111] z-0">
-						<div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-br from-purple-100/40 to-transparent dark:from-purple-900/10 dark:to-transparent rounded-full blur-3xl" />
-						<div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-blue-100/30 to-transparent dark:from-blue-900/10 dark:to-transparent rounded-full blur-3xl" />
-					</div>
-					<div className="relative z-10 max-w-7xl mx-auto px-6 py-8">
-						<Navbar navItems={siteConfig.nav} />
-						<main>{children}</main>
+			<body className="font-sans antialiased">
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="system"
+					enableSystem
+					disableTransitionOnChange
+				>
+					<div className="min-h-screen">
+						<Navbar items={SITE_CONFIG.navigation} />
+						<main className="max-w-3xl mx-auto px-6 py-12">{children}</main>
 					</div>
 				</ThemeProvider>
 			</body>

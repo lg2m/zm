@@ -1,74 +1,41 @@
-"use client";
+import { ArrowUpRight } from "lucide-react";
 
-import { motion } from "framer-motion";
-import { ChevronRight } from "lucide-react";
-
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { socialConfig } from "@/config/socials";
 import { Icons } from "@/components/icons";
+import { LINKS_CONFIG } from "@/config/links";
 
 export default function LinksPage() {
-	const container = {
-		hidden: { opacity: 0 },
-		show: {
-			opacity: 1,
-			transition: {
-				staggerChildren: 0.07,
-			},
-		},
-	};
-
-	const item = {
-		hidden: { opacity: 0, y: 20 },
-		show: { opacity: 1, y: 20 },
-	};
-
 	return (
-		<div className="py-12 flex flex-col items-center">
-			<motion.div
-				initial="hidden"
-				animate="show"
-				variants={container}
-				className="w-full max-w-md px-4 sm:px-0"
-			>
-				<motion.div variants={item} className="text-center mb-8">
-					<Avatar className="mb-4 w-20 h-20 rounded-full mx-auto">
-						<AvatarImage
-							src={socialConfig.avatar.href}
-							alt={socialConfig.avatar.alt}
-						/>
-						<AvatarFallback>{socialConfig.avatar.fallback}</AvatarFallback>
-					</Avatar>
-					<h1 className="text-xl font-normal mb-1">{socialConfig.title}</h1>
-					<p className="text-sm text-gray-600 dark:text-gray-400">
-						{socialConfig.subtitle}
-					</p>
-				</motion.div>
+		<div className="space-y-8">
+			<div>
+				<h1 className="text-2xl font-normal mb-1">links</h1>
+				<p className="text-[15px] text-muted-foreground">
+					find me around the internet
+				</p>
+			</div>
 
-				<motion.div variants={container} className="space-y-3">
-					{socialConfig.links.map((link) => {
-						const Icon = Icons[link.icon];
-
-						return (
-							<motion.a
-								key={link.href}
-								href={link.href}
-								target="_blank"
-								rel="noopener noreferrer"
-								whileHover={{ scale: 1.02 }}
-								whileTap={{ scale: 0.98 }}
-								className="flex items-center p-3 rounded-xl bg-white dark:bg-gray-800/80 shadow-sm hover:shadow-md transition-all group"
-							>
-								<div className={`${link.color} rounded-md p-2 text-white mr-3`}>
-									<Icon className="h-5 w-5" />
-								</div>
-								<span className="text-sm font-normal">{link.title}</span>
-								<ChevronRight className="h-4 w-4 ml-auto text-gray-400 group-hover:translate-x-1 transition-transform" />
-							</motion.a>
-						);
-					})}
-				</motion.div>
-			</motion.div>
+			<div className="space-y-1">
+				{LINKS_CONFIG.map((link) => {
+					const Icon = Icons[link.icon];
+					return (
+						<a
+							key={link.href}
+							href={link.href}
+							target="_blank"
+							rel="noopener noreferrer"
+							className="flex items-center justify-between py-3 px-2 -mx-2 rounded hover:bg-accent/50 transition-colors group"
+						>
+							<div className="flex items-center">
+								<Icon className="h-5 w-5 mr-2 text-muted-foreground group-hover:text-foreground transition-colors" />
+								<span className="text-[15px] font-normal">{link.name}</span>
+								<span className="text-[15px] text-muted-foreground ml-2">
+									- {link.description}
+								</span>
+							</div>
+							<ArrowUpRight className="h-4 w-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+						</a>
+					);
+				})}
+			</div>
 		</div>
 	);
 }

@@ -1,4 +1,4 @@
-import { LinkedinIcon, MailIcon, type LucideProps } from "lucide-react";
+import { type LucideProps, MailIcon } from "lucide-react";
 
 export const Icons = {
 	github: ({ ...props }: LucideProps) => (
@@ -17,7 +17,38 @@ export const Icons = {
 			/>
 		</svg>
 	),
-	linkedin: LinkedinIcon,
+	gitlab: ({ ...props }: LucideProps) => (
+		<svg
+			aria-hidden="true"
+			data-icon="gitlab"
+			role="img"
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 24 24"
+			{...props}
+		>
+			<title>GitLab</title>
+			<path
+				fill="currentColor"
+				d="m23.6004 9.5927-.0337-.0862L20.3.9814a.851.851 0 0 0-.3362-.405.8748.8748 0 0 0-.9997.0539.8748.8748 0 0 0-.29.4399l-2.2055 6.748H7.5375l-2.2057-6.748a.8573.8573 0 0 0-.29-.4412.8748.8748 0 0 0-.9997-.0537.8585.8585 0 0 0-.3362.4049L.4332 9.5015l-.0325.0862a6.0657 6.0657 0 0 0 2.0119 7.0105l.0113.0087.03.0213 4.976 3.7264 2.462 1.8633 1.4995 1.1321a1.0085 1.0085 0 0 0 1.2197 0l1.4995-1.1321 2.4619-1.8633 5.006-3.7489.0125-.01a6.0682 6.0682 0 0 0 2.0094-7.003z"
+			/>
+		</svg>
+	),
+	linkedin: ({ ...props }: LucideProps) => (
+		<svg
+			aria-hidden="true"
+			data-icon="linkedin"
+			role="img"
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 24 24"
+			{...props}
+		>
+			<title>LinkedIn</title>
+			<path
+				fill="currentColor"
+				d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+			/>
+		</svg>
+	),
 	mail: MailIcon,
 	twitch: ({ ...props }: LucideProps) => (
 		<svg
