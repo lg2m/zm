@@ -1,7 +1,4 @@
-export type NavItem = Readonly<{
-	href: `/${string}` | "/";
-	label: string;
-}>;
+import type { NavItem } from "@/types";
 
 export type Author = Readonly<{
 	name: string;

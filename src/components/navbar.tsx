@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
 import { cn } from "@/lib/utils";
-import type { Navigation } from "@/types/navigation";
+import type { NavItem } from "@/types";
 
 import { ThemeToggle } from "./theme-toggle";
 
-export function Navbar({ items }: { items: Navigation }) {
+export function Navbar({ items }: { items: readonly NavItem[] }) {
 	const pathname = usePathname();
 
 	return (
